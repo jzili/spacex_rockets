@@ -1,7 +1,14 @@
 import './App.css';
+import Table from './components/Table';
 
 function App() {
-  return <>Hello World</>;
+  return (
+    <>
+      <section>
+        <Table />
+      </section>
+    </>
+  );
 }
 
 export default App;
