@@ -1,10 +1,11 @@
-import './App.css';
-import Table from './components/Table';
+import Input from './components/atoms/Input';
+import Table from './components/atoms/Table';
 
 function App() {
   return (
     <>
       <section>
+        <Input />
         <Table />
       </section>
     </>
