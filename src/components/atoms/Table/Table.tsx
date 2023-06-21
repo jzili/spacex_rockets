@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { StyledTable, TableHeader, TableRow, TableCell } from './styles';
 
-interface Item {
+interface Rocket {
   id: number;
   rocket_name: string;
   diameter: {
@@ -16,19 +16,23 @@ interface Item {
   cost_per_launch: number;
 }
 
-const Table = () => {
-  const [items, setItems] = useState([]);
+interface TableProps {
+  data: any[];
+}
+
+const Table: React.FC<TableProps> = () => {
+  const [rockets, setRockets] = useState<Rocket[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<null | string>(null);
 
   useEffect(() => {
     (async () => {
       try {
-        const data: [] = await (
+        const data: Rocket[] = await (
           await fetch('https://api.spacexdata.com/v3/rockets')
         ).json();
 
-        setItems(data);
+        setRockets(data);
         setLoading(false);
       } catch (error) {
         setError('Error...');
@@ -38,7 +42,7 @@ const Table = () => {
   }, []);
 
   if (loading) {
-    <p>{error}</p>;
+    return <p>{error}</p>;
   }
 
   return (
@@ -53,7 +57,7 @@ const Table = () => {
         </tr>
       </thead>
       <tbody>
-        {items.map((item: Item) => (
+        {rockets.map((item: Rocket) => (
           <TableRow key={item.id}>
             <TableCell>{item.rocket_name}</TableCell>
             <TableCell>{item.diameter.meters + 'm'}</TableCell>

@@ -8,10 +8,24 @@ export const StyledInputWrapper = styled.div`
   margin-top: 25px;
   border: none;
   border-radius: 8px;
+  align-items: center;
+
+  h1 {
+    font-weight: 500;
+  }
 `;
 
-export const StyledIcon = styled.span`
-  color: #d0d0d0;
+export const StyledIconInputDiv = styled.div`
+  width: 70%;
+  font-size: 16px;
+  background-color: #f5f5fa;
+  border-radius: 50px;
+  padding-left: 15px;
+
+  i {
+    font-size: 14px;
+    color: #5a71e4;
+  }
 `;
 
 export const StyledInput = styled.input`
@@ -20,12 +34,8 @@ export const StyledInput = styled.input`
   border: none;
   border-radius: 50px;
   background-color: #f5f5fa;
-  padding-left: 20px;
+  padding: 8px;
 
   font-size: 1em;
   line-height: 1.5;
-
-  /* &::placeholder {
-    color: #d0d0d0;
-  }*/
 `;

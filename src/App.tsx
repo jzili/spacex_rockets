@@ -1,12 +1,12 @@
-import Input from './components/atoms/Input';
-import Table from './components/atoms/Table';
+//import Input from './components/atoms/Input';
+//import Table from './components/atoms/Table';
+import SearchDataFilter from './components/molecules/SearchFilter/SearchFilter';
 
 function App() {
   return (
     <>
       <section>
-        <Input />
-        <Table />
+        <SearchDataFilter />
       </section>
     </>
   );
