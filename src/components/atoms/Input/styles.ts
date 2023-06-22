@@ -13,6 +13,10 @@ export const StyledInputWrapper = styled.div`
   h1 {
     font-weight: 500;
   }
+
+  p {
+    color: #676c7e;
+  }
 `;
 
 export const StyledIconInputDiv = styled.div`

@@ -1,5 +1,11 @@
 import { useEffect, useState } from 'react';
-import { StyledTable, TableHeader, TableRow, TableCell } from './styles';
+import {
+  StyledTable,
+  TableHeader,
+  TableRow,
+  TableCell,
+  StyledMessage,
+} from './styles';
 
 interface Rocket {
   id: number;
@@ -17,32 +23,28 @@ interface Rocket {
 }
 
 interface TableProps {
-  data: any[];
+  data: Rocket[];
 }
 
-const Table: React.FC<TableProps> = () => {
-  const [rockets, setRockets] = useState<Rocket[]>([]);
+const Table: React.FC<TableProps> = ({ data }) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<null | string>(null);
 
   useEffect(() => {
-    (async () => {
-      try {
-        const data: Rocket[] = await (
-          await fetch('https://api.spacexdata.com/v3/rockets')
-        ).json();
+    setLoading(false);
+    if (error) setError('Error...');
+  }, [error]);
 
-        setRockets(data);
-        setLoading(false);
-      } catch (error) {
-        setError('Error...');
-        setLoading(false);
-      }
-    })();
-  }, []);
+  if (data.length === 0) {
+    return (
+      <StyledMessage>
+        <p>No results...</p>
+      </StyledMessage>
+    );
+  }
 
   if (loading) {
-    return <p>{error}</p>;
+    return <p>Loading...</p>;
   }
 
   return (
@@ -57,7 +59,7 @@ const Table: React.FC<TableProps> = () => {
         </tr>
       </thead>
       <tbody>
-        {rockets.map((item: Rocket) => (
+        {data.map((item: Rocket) => (
           <TableRow key={item.id}>
             <TableCell>{item.rocket_name}</TableCell>
             <TableCell>{item.diameter.meters + 'm'}</TableCell>
