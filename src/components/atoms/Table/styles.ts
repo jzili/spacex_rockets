@@ -3,11 +3,18 @@ import { styled } from 'styled-components';
 export const StyledTable = styled.table`
   width: 100%;
   border-spacing: 0 3px;
+  margin-top: 40px;
 
   @media screen and (min-width: 768px) {
   }
   @media screen and (min-width: 1096px) {
   }
+`;
+
+export const StyledMessage = styled.div`
+  font-size: 18px;
+  font-weight: 500;
+  padding: 18px;
 `;
 
 export const TableHeader = styled.th`
@@ -24,10 +31,21 @@ export const TableHeader = styled.th`
   @media screen and (min-width: 768px) {
     &:first-child {
       padding-left: 30px;
+      padding-right: 0;
+    }
+
+    &:nth-child(2) {
+      padding-left: 0;
+      padding-right: 50px;
+    }
+
+    &:nth-child(3) {
+      padding-left: 0;
+      padding-right: 50px;
     }
 
     &:last-child {
-      padding-right: 55px;
+      padding-right: 65px;
     }
   }
 `;
@@ -54,13 +72,27 @@ export const TableCell = styled.td`
   }
 
   @media screen and (min-width: 768px) {
+    width: calc(100% / 5);
+
     &:first-child {
-      width: 150px;
+      width: 113px;
+      padding-right: 0;
       padding-left: 30px;
     }
 
+    &:nth-child(2) {
+      padding-left: 0;
+      padding-right: 50px;
+    }
+
+    &:nth-child(3) {
+      padding-left: 0;
+      padding-right: 50px;
+    }
+
     &:last-child {
-      padding-right: 55px;
+      width: 240px;
+      padding-right: 65px;
     }
   }
 `;

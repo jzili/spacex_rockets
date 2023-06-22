@@ -15,12 +15,14 @@ interface Rocket {
     kg: number;
   };
   cost_per_launch: number;
-  [key: string]: any;
+  [key: string | number]: any;
 }
 
 function SearchFilter() {
   const [rockets, setRockets] = useState<Rocket[]>([]);
   const [filteredRockets, setFilteredRockets] = useState<Rocket[]>([]);
+
+  const [searchResults, setSearchResults] = useState<number | null>(null);
 
   useEffect(() => {
     (async () => {
@@ -35,27 +37,37 @@ function SearchFilter() {
     })();
   }, []);
 
-  const handleFilter = (query: string) => {
-    const keys = ['rocket_name', 'diameter'];
+  const filterRockets = (query: string) => {
+    const keys = [
+      'rocket_name',
+      'diameter',
+      'height',
+      'mass',
+      'cost_per_launch',
+    ];
     const filteredRockets = rockets.filter((rocket) =>
       keys.some((key) => {
         const value = rocket[key];
         if (typeof value === 'string') {
           return value.toLowerCase().includes(query.toLowerCase());
+        } else if (typeof value === 'object' && value !== null) {
+          return Object.values(value).some((val: any) =>
+            val.toString().toLowerCase().includes(query.toLowerCase())
+          );
+        } else if (typeof value === 'number') {
+          return value.toString().toLowerCase().includes(query.toLowerCase());
         }
         return false;
       })
     );
     setFilteredRockets(filteredRockets);
-    console.log(filteredRockets);
+    setSearchResults(filteredRockets.length);
   };
 
   return (
     <>
-      <Input onFilter={handleFilter} />
-      <Table
-        data={filteredRockets.map((rocket) => ({ ...rocket, key: rocket.id }))}
-      />
+      <Input onFilter={filterRockets} searchResults={searchResults} />
+      <Table data={filteredRockets} />
     </>
   );
 }
