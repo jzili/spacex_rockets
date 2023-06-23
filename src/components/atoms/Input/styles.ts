@@ -16,6 +16,13 @@ export const StyledInputWrapper = styled.div`
 
   p {
     color: #676c7e;
+    padding-right: 25px;
+  }
+
+  @media screen and (min-width: 768px) {
+    p {
+      padding: 0;
+    }
   }
 `;
 
