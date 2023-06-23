@@ -1,4 +1,4 @@
-import SearchDataFilter from './components/molecules/SearchFilter/SearchFilter';
+import SearchDataFilter from './components/organisms/SearchFilter/SearchFilter';
 
 function App() {
   return (
